@@ -48,7 +48,7 @@ public class EmailRestServiceIntegrationTests {
 
     @Disabled(value = "Enable this test only when send mail integration is to be tested with sendgrid api.")
     @Test()
-    public void testSendEmail_accepted(){
+    public void givenSendEmail_whenInputPayloadComplete_thenReturnAccepted(){
         //create HttpEntity with authorization header
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
@@ -68,7 +68,7 @@ public class EmailRestServiceIntegrationTests {
     }
 
     @Test
-    public void testUnauthorizedUser(){
+    public void givenSendMail_whenNoAuthorizationHeaderPresent_thenReturnUnAuthorized(){
         //create HttpEntity with no authorization header
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
@@ -80,7 +80,7 @@ public class EmailRestServiceIntegrationTests {
     }
 
     @Test
-    public void testBadRequest(){
+    public void givenSendMail_whenEmailInputIncomplete_thenReturnBadRequest(){
         //create HttpEntity
         //set authorization header
         HttpHeaders headers = new HttpHeaders();

@@ -42,7 +42,7 @@ public class EmailRestControllerTests {
     RestTemplateBuilder restTemplateBuilder;
 
     @Test
-    public void givenSendEmail_shouldReturnAccepted() throws Exception {
+    public void givenSendEmail_whenEmailInputComplete_thenReturnAccepted() throws Exception {
         when(emailService.sendEmail(any(EmailDto.class),anyBoolean())).thenReturn(new ResponseEntity<>(HttpStatus.ACCEPTED));
         //create payload
         EmailDto emailDto = new EmailDto();

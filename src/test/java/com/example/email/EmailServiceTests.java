@@ -56,7 +56,7 @@ public class EmailServiceTests {
     }
 
     @Test
-    public void givenSendMail_shouldReturnAccepted() throws URISyntaxException, JsonProcessingException {
+    public void givenSendMail_whenEmailInputComplete_thenReturnAccepted() throws URISyntaxException, JsonProcessingException {
         //create payload
         EmailDto emailDto = new EmailDto();
         emailDto.setTo(Collections.singletonList(new EmailAddress("one@example.com")));
