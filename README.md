@@ -41,9 +41,9 @@ Testing
 
 OAS API Documentation 
 ------------------
-<b>OAS Doc:</b> http://<serverhost>:<port>/api-docs
+<b>OAS Doc:</b> http://host:port/api-docs
 
-<b>UI:</b> http://<serverhost>:<port>/email-api-ui.html
+<b>UI:</b> http://host:port/email-api-ui.html
 ```
 http://localhost:8180/api-docs
 http://localhost:8180/email-api-ui.html
