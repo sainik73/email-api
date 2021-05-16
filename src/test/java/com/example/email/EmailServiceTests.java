@@ -12,6 +12,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+import org.springframework.boot.test.autoconfigure.web.client.RestClientTest;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.*;
 import org.springframework.test.web.client.ExpectedCount;
@@ -30,8 +32,9 @@ import static org.springframework.test.web.client.response.MockRestResponseCreat
  * @author Kiran
  * @since 5/1/2021
  */
-@SpringBootTest
-public class EmailServiceTests {
+
+@RestClientTest(value = {EmailService.class,EmailDtoToSendGridMailDtoMapper.class,RandomQuoteService.class})
+class EmailServiceTests {
 
     @Value("${sendgrid.mail.api.uri}")
     private String sendGridURI;
@@ -43,9 +46,9 @@ public class EmailServiceTests {
     @Autowired
     EmailDtoToSendGridMailDtoMapper emailDtoToSendGridMailDtoMapper;
     @Autowired
-    private EmailService emailService;
-    @Autowired
     RandomQuoteService randomQuoteService;
+    @Autowired
+    private EmailService emailService;
     private MockRestServiceServer mockServer;
     @Autowired
     private ObjectMapper objectMapper;
@@ -56,7 +59,7 @@ public class EmailServiceTests {
     }
 
     @Test
-    public void givenSendMail_whenEmailInputComplete_thenReturnAccepted() throws URISyntaxException, JsonProcessingException {
+    void givenSendMail_whenEmailInputComplete_thenReturnAccepted() throws URISyntaxException, JsonProcessingException {
         //create payload
         EmailDto emailDto = new EmailDto();
         emailDto.setTo(Collections.singletonList(new EmailAddress("one@example.com")));

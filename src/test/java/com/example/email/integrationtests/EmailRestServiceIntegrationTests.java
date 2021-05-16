@@ -16,6 +16,7 @@ import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.test.context.TestPropertySource;
 import org.springframework.web.client.RestTemplate;
 import java.util.Collections;
 
@@ -26,7 +27,9 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
  * @since 5/1/2021
  */
 @SpringBootTest
-public class EmailRestServiceIntegrationTests {
+@TestPropertySource(
+        locations = "classpath:application-integrationtest.properties")
+class EmailRestServiceIntegrationTests {
 
     @Value("${sendgrid.mail.api.uri}")
     private String sendGridURI;
@@ -48,7 +51,7 @@ public class EmailRestServiceIntegrationTests {
 
     @Disabled(value = "Enable this test only when send mail integration is to be tested with sendgrid api.")
     @Test()
-    public void givenSendEmail_whenInputPayloadComplete_thenReturnAccepted(){
+    void givenSendEmail_whenInputPayloadComplete_thenReturnAccepted(){
         //create HttpEntity with authorization header
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
@@ -68,7 +71,7 @@ public class EmailRestServiceIntegrationTests {
     }
 
     @Test
-    public void givenSendMail_whenNoAuthorizationHeaderPresent_thenReturnUnAuthorized(){
+    void givenSendMail_whenNoAuthorizationHeaderPresent_thenReturnUnAuthorized(){
         //create HttpEntity with no authorization header
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
@@ -80,7 +83,7 @@ public class EmailRestServiceIntegrationTests {
     }
 
     @Test
-    public void givenSendMail_whenEmailInputIncomplete_thenReturnBadRequest(){
+    void givenSendMail_whenEmailInputIncomplete_thenReturnBadRequest(){
         //create HttpEntity
         //set authorization header
         HttpHeaders headers = new HttpHeaders();
